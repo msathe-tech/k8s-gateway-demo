@@ -18,16 +18,16 @@ steps:
 
 # Render New Deployment config with new container version and commit to config-sync-app-owner repo
 # Render HTTPRoute 
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
+- name: 'gcr.io/cloud-builders/git' #'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
   id: Render New App Deployment, Service, and Commit to Namespace repo (config-sync-app-owner)
   entrypoint: 'bash'
   args: ['./render-and-gitpush.sh']
   secretEnv: ['GITHUB_EMAIL', 'GITHUB_USERNAME', 'GITHUB_TOKEN']
-  env: ['SHORT_SHA=$SHORT_SHA', 'COMMIT_SHA=$COMMIT_SHA', _CLUSTER_NAME=$_CLUSTER_NAME, _CLUSTER_REGION=$_CLUSTER_REGION]
+  env: ['SHORT_SHA=$SHORT_SHA', 'COMMIT_SHA=$COMMIT_SHA']
 
-substitutions:
-  _CLUSTER_NAME: sp1-cluster # default cluster name
-  _CLUSTER_REGION: us-east1 # default cluster region
+# substitutions:
+#   _CLUSTER_NAME: sp1-cluster # default cluster name
+#   _CLUSTER_REGION: us-east1 # default cluster region
 
 availableSecrets:
   secretManager:
