@@ -22,9 +22,9 @@ patches:
     kind: Service
     name: k8s-gateway-api-demo-service
   patch: |-
-    - op: replace
-      path: /metadata/name
-      value: "k8s-gateway-api-demo-service-__VERSION__"
+    # - op: replace
+    #   path: /metadata/name
+    #   value: "k8s-gateway-api-demo-service-__VERSION__"
     - op: replace
       path: /spec/selector/app
       value: "k8s-gateway-api-demo-__VERSION__"
