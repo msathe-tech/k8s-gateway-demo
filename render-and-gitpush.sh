@@ -15,13 +15,12 @@ render_app_and_service()
     echo "Update foo-app to version: ${SHORT_SHA}" > README.md
     
 
-    git add gateway-api-demo-app-"$SHORT_SHA".yaml && \
+    git add gateway-api-demo-app.yaml && \
     git commit -m "Rendered: ${SHORT_SHA}
     Built from commit ${COMMIT_SHA} of repository foo-config-source - main branch 
     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
 
     echo "---Updated foo-app to version: ${SHORT_SHA}---"
-    echo "---Added gateway-api-demo-app-${SHORT_SHA}.yaml in Namespace (AppOwner) Config Sync Repo.---"
     cd ..
 }
 
