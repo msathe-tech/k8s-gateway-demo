@@ -5,7 +5,7 @@ metadata:
     app: k8s-gateway-api-demo
   name: k8s-gateway-api-demo  
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: k8s-gateway-api-demo
@@ -38,13 +38,13 @@ spec:
           httpGet:
             path: /actuator/health/liveness
             port: 8080
-          initialDelaySeconds: 5
+          initialDelaySeconds: 2
           timeoutSeconds: 10
         readinessProbe:
           httpGet:
             path: /actuator/health/readiness
             port: 8080
-          initialDelaySeconds: 5
+          initialDelaySeconds: 2
           timeoutSeconds: 10
 
           
