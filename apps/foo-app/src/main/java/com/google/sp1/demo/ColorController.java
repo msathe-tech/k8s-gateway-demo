@@ -41,6 +41,7 @@ public class ColorController {
             // String hostname = webClient.get().uri("instance/hostname").retrieve().bodyToMono(String.class).block();
             // map.put("Host", hostname);
             map.put("Node_Name", System.getenv().get("NODE_NAME"));
+            map.put("Host_IP", System.getenv().get("HOST_IP"));
             map.put("Pod_IP", System.getenv().get("POD_IP"));
             map.put("Pod_Namespace", System.getenv().get("POD_NAMESPACE"));
             map.put("Pod_Name", System.getenv().get("POD_NAME"));

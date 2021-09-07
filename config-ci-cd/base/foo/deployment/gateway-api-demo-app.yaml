@@ -26,6 +26,10 @@ spec:
           requests:
             cpu: "0.5"
         env:
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
           - name: POD_NAMESPACE
             valueFrom:
               fieldRef:
@@ -46,6 +50,10 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.serviceAccountName
+          - name: CONTAINER_IMAGE
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.containers[0].image
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
