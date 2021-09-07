@@ -10,44 +10,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ColorController {
     
     HashMap<String, String> map = new HashMap<>();
-    //private final WebClient webClient;
-
-    boolean isGKE = true;
-
-    // public ColorController(WebClient.Builder webClientBuilder)
-    // {
-    //     try {
-    //         this.webClient = webClientBuilder.baseUrl("http://metadata.google.internal/computeMetadata/v1/")
-    //                 .defaultHeaders(httpHeaders -> {
-    //                     httpHeaders.add("Metadata-Flavor" , "Google");
-    //                 })
-    //                 .build();
-    //     } catch (Exception exception) {
-    //         isGKE = false;
-    //     }
-    // }
-
+    
     @GetMapping("/metadata")
     public Map<String, String> metadata() {
         
         if (map.isEmpty()) {
             
-            map.put("color", "Orange");
-            // String cluster_name = webClient.get().uri("instance/attributes/cluster-name").retrieve().bodyToMono(String.class)
-            //         .block();
-            // map.put("ClusterName", cluster_name);
-            // String instance = webClient.get().uri("instance/zone").retrieve().bodyToMono(String.class).block();
-            // map.put("Zone", instance);
-            // String hostname = webClient.get().uri("instance/hostname").retrieve().bodyToMono(String.class).block();
-            // map.put("Host", hostname);
+            map.put("color", "MediumSpringGreen");
             map.put("Node_Name", System.getenv().get("NODE_NAME"));
             map.put("Host_IP", System.getenv().get("HOST_IP"));
             map.put("Pod_IP", System.getenv().get("POD_IP"));
             map.put("Pod_Namespace", System.getenv().get("POD_NAMESPACE"));
             map.put("Pod_Name", System.getenv().get("POD_NAME"));
             map.put("Service_Account", System.getenv().get("POD_SERVICE_ACCOUNT"));
-            // String project = webClient.get().uri("project/project-id").retrieve().bodyToMono(String.class).block();
-            // map.put("Project_ID", project);
+            
         }
         return map;
     }
