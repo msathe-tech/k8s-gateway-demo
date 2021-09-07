@@ -23,12 +23,11 @@ get("/metadata", function (response) {
     new gridjs.Grid({
         columns: ['Property', 'Value'],
         data: [
-            ['ClusterName', obj.ClusterName],
-            ['Zone', obj.Zone],
-            ['Host', obj.Host],
+            ['Node_Name', obj.Node_Name],
+            ['Pod_Name', obj.Pod_Name],
             ['Pod_IP', obj.Pod_IP],
             ['Pod_Namespace', obj.Pod_Namespace],
-            ['Project_ID', obj.Project_ID]
+            ['Service_Account', obj.Service_Account]
         ]
     }).render(document.getElementById("wrapper"));
 

@@ -10,16 +10,22 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ColorController {
     
     HashMap<String, String> map = new HashMap<>();
-    private final WebClient webClient;
+    //private final WebClient webClient;
 
-    public ColorController(WebClient.Builder webClientBuilder)
-    {
-        this.webClient = webClientBuilder.baseUrl("http://metadata.google.internal/computeMetadata/v1/")
-                .defaultHeaders(httpHeaders -> {
-                    httpHeaders.add("Metadata-Flavor" , "Google");
-                })
-                .build();
-    }
+    boolean isGKE = true;
+
+    // public ColorController(WebClient.Builder webClientBuilder)
+    // {
+    //     try {
+    //         this.webClient = webClientBuilder.baseUrl("http://metadata.google.internal/computeMetadata/v1/")
+    //                 .defaultHeaders(httpHeaders -> {
+    //                     httpHeaders.add("Metadata-Flavor" , "Google");
+    //                 })
+    //                 .build();
+    //     } catch (Exception exception) {
+    //         isGKE = false;
+    //     }
+    // }
 
     @GetMapping("/metadata")
     public Map<String, String> metadata() {
@@ -27,17 +33,20 @@ public class ColorController {
         if (map.isEmpty()) {
             
             map.put("color", "FloralWhite");
-            String cluster_name = webClient.get().uri("instance/attributes/cluster-name").retrieve().bodyToMono(String.class)
-                    .block();
-            map.put("ClusterName", cluster_name);
-            String instance = webClient.get().uri("instance/zone").retrieve().bodyToMono(String.class).block();
-            map.put("Zone", instance);
-            String hostname = webClient.get().uri("instance/hostname").retrieve().bodyToMono(String.class).block();
-            map.put("Host", hostname);
+            // String cluster_name = webClient.get().uri("instance/attributes/cluster-name").retrieve().bodyToMono(String.class)
+            //         .block();
+            // map.put("ClusterName", cluster_name);
+            // String instance = webClient.get().uri("instance/zone").retrieve().bodyToMono(String.class).block();
+            // map.put("Zone", instance);
+            // String hostname = webClient.get().uri("instance/hostname").retrieve().bodyToMono(String.class).block();
+            // map.put("Host", hostname);
+            map.put("Node_Name", System.getenv().get("NODE_NAME"));
             map.put("Pod_IP", System.getenv().get("POD_IP"));
             map.put("Pod_Namespace", System.getenv().get("POD_NAMESPACE"));
-            String project = webClient.get().uri("project/project-id").retrieve().bodyToMono(String.class).block();
-            map.put("Project_ID", project);
+            map.put("Pod_Name", System.getenv().get("POD_NAME"));
+            map.put("Service_Account", System.getenv().get("POD_SERVICE_ACCOUNT"));
+            // String project = webClient.get().uri("project/project-id").retrieve().bodyToMono(String.class).block();
+            // map.put("Project_ID", project);
         }
         return map;
     }
