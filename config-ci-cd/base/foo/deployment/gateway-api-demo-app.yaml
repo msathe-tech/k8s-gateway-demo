@@ -53,7 +53,7 @@ spec:
           - name: CONTAINER_IMAGE
             valueFrom:
               fieldRef:
-                fieldPath: spec.containers.image
+                fieldPath: spec.containers[1].image
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
