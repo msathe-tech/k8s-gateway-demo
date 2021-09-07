@@ -32,7 +32,7 @@ public class ColorController {
         
         if (map.isEmpty()) {
             
-            map.put("color", "Aqua");
+            map.put("color", "LavenderBlush");
             // String cluster_name = webClient.get().uri("instance/attributes/cluster-name").retrieve().bodyToMono(String.class)
             //         .block();
             // map.put("ClusterName", cluster_name);
